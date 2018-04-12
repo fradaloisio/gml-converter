@@ -6,7 +6,7 @@ GML_C=$(echo "$GML" | sed -rn 's|.*<gml:coordinates>(.*)</gml:coordinates>.*|\1|
 echo "Found coordinates: $GML_C"
 
 
-GML_POINTS=($(echo "$GML_C" |awk -F" " '{print$0}'))
+IFS=' ' read -ra GML_POINTS <<< "$GML_C"
 N_POINTS=$((${#GML_POINTS[@]}-1))
 echo "found $N_POINTS points"
 for p in "${GML_POINTS[@]}"
